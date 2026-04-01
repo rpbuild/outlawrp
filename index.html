@@ -9,14 +9,20 @@
         @import url('https://fonts.googleapis.com/css2?family=Rye&family=Spectral:wght@300;400;700&display=swap');
 
         :root {
-            --bg-color: #0a0808;
+            --bg-color: #050404;
             --text-main: #d3c7b6;
             --accent-red: #8a1c1c;
             --accent-red-hover: #b82323;
             --accent-gold: #b38b3b;
-            --panel-bg: rgba(15, 12, 12, 0.90);
+            --panel-bg: linear-gradient(145deg, rgba(20, 16, 16, 0.95), rgba(10, 8, 8, 0.98));
             --border-style: 2px solid var(--accent-red);
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-red); border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-red-hover); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -34,15 +40,15 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            transition: background-image 0.8s ease-in-out;
+            transition: background-image 1s ease-in-out;
             z-index: -2;
             background-image: url('https://images.unsplash.com/photo-1558231015-680fcc304ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
         }
 
-        /* Overlay to darken background */
+        /* Overlay - Updated to a cinematic vignette */
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(10, 8, 8, 0.9)); 
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(5, 4, 4, 0.95) 100%); 
             z-index: -1;
         }
 
@@ -51,17 +57,18 @@
 
         /* Navigation */
         nav {
-            background-color: rgba(5, 5, 5, 0.98);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.98), rgba(0,0,0,0.9));
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 3px solid var(--accent-red);
             position: sticky; top: 0; z-index: 100;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
         }
         
-        .logo { font-size: 2.2rem; font-family: 'Rye', cursive; color: var(--accent-red); text-shadow: 2px 2px 0 #000; letter-spacing: 2px; }
+        .logo { font-size: 2.2rem; font-family: 'Rye', cursive; color: var(--accent-red); text-shadow: 3px 3px 0px rgba(0,0,0,0.8), 0 0 15px rgba(138, 28, 28, 0.4); letter-spacing: 2px; cursor: pointer; transition: transform 0.3s;}
+        .logo:hover { transform: scale(1.02); }
         .logo span { color: var(--accent-gold); }
 
         .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
@@ -70,117 +77,125 @@
             color: var(--text-main);
             font-size: 1rem; font-family: 'Spectral', serif; font-weight: bold;
             cursor: pointer; text-transform: uppercase; letter-spacing: 2px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             padding: 5px 10px;
             border-bottom: 2px solid transparent;
         }
         .nav-links button:hover, .nav-links button.active { 
             color: var(--accent-red); 
             border-bottom: 2px solid var(--accent-red);
-            text-shadow: 0 0 8px rgba(138, 28, 28, 0.6);
+            text-shadow: 0 0 12px rgba(138, 28, 28, 0.8);
+            transform: translateY(-2px);
         }
 
         /* Server Status Badge */
         .server-status {
             display: flex; align-items: center; gap: 10px;
-            background: rgba(0,0,0,0.6); padding: 8px 15px; border: 1px solid #333; border-radius: 4px;
+            background: rgba(0,0,0,0.8); padding: 8px 15px; border: 1px solid #333; border-radius: 4px;
             font-family: 'Rye', cursive; font-size: 0.9rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
         .status-dot { width: 10px; height: 10px; background-color: #2ecc71; border-radius: 50%; box-shadow: 0 0 8px #2ecc71; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         /* Page Container */
         .container { max-width: 1300px; margin: 3rem auto; padding: 0 1rem; min-height: 75vh; }
 
         /* Sections */
-        .page-section { display: none; animation: fadeIn 0.6s ease-out; }
+        .page-section { display: none; animation: fadeIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; opacity: 0; transform: translateY(15px); }
         .page-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
         /* Panel Design */
         .panel {
             background: var(--panel-bg);
             border: var(--border-style);
             padding: 3rem; border-radius: 3px; margin-bottom: 2rem;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 0 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9), inset 0 0 60px rgba(0,0,0,0.8);
+            position: relative;
         }
         
         .panel-header { text-align: center; margin-bottom: 3rem; border-bottom: 1px solid #333; padding-bottom: 1rem;}
-        .panel-header h2 { font-size: 3rem; color: var(--accent-red); text-shadow: 2px 2px #000;}
+        .panel-header h2 { font-size: 3.2rem; color: var(--accent-red); text-shadow: 3px 3px 5px rgba(0,0,0,0.9);}
 
         /* Home Page */
         .hero { text-align: center; margin-bottom: 5rem; margin-top: 4rem; }
-        .hero h1 { font-size: 5rem; margin-bottom: 1rem; color: #fff; text-shadow: 4px 4px 10px #000, 0 0 30px rgba(138, 28, 28, 0.8); letter-spacing: 4px;}
+        .hero h1 { font-size: 5.5rem; margin-bottom: 1rem; color: #fff; text-shadow: 4px 4px 10px #000, 0 0 35px rgba(138, 28, 28, 0.9); letter-spacing: 4px;}
         .hero p { font-size: 1.8rem; max-width: 900px; margin: 0 auto 3rem auto; text-shadow: 2px 2px 5px #000; font-weight: 300; color: #eee;}
         
         .btn {
             background: var(--accent-red); color: #fff;
             padding: 18px 40px; font-size: 1.4rem; font-family: 'Rye', cursive;
             border: 2px solid #000; cursor: pointer; text-transform: uppercase;
-            box-shadow: 4px 4px 0px #000; transition: all 0.2s;
-            letter-spacing: 2px;
+            box-shadow: 4px 4px 0px #000; transition: all 0.2s ease;
+            letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
-        .btn:hover { background: var(--accent-gold); color: #000; transform: translateY(-3px); box-shadow: 6px 6px 0px #000; }
+        .btn:hover { background: var(--accent-gold); color: #000; transform: translateY(-4px); box-shadow: 6px 6px 15px rgba(179, 139, 59, 0.4), 6px 6px 0px #000; text-shadow: none;}
         .btn:active { transform: translateY(2px); box-shadow: 1px 1px 0px #000; }
 
         /* Features & Factions Grid */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
         .card { 
-            text-align: center; padding: 2.5rem; background: rgba(5,5,5,0.8); 
-            border: 1px solid #444; transition: transform 0.3s, border-color 0.3s;
+            text-align: center; padding: 2.5rem; 
+            background: linear-gradient(180deg, rgba(20,20,20,0.9) 0%, rgba(5,5,5,0.9) 100%); 
+            border: 1px solid #444; transition: all 0.3s ease;
             position: relative; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
         }
         .card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--accent-red);
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--accent-red); transition: height 0.3s ease;
         }
-        .card:hover { transform: translateY(-8px); border-color: var(--accent-gold); box-shadow: 0 10px 25px rgba(0,0,0,0.9); }
-        .card h3 { margin-bottom: 1rem; font-size: 1.8rem; color: #fff; }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent-gold); box-shadow: 0 15px 35px rgba(0,0,0,0.9), 0 0 20px rgba(179, 139, 59, 0.1); }
+        .card:hover::before { height: 8px; background: var(--accent-gold); }
+        .card h3 { margin-bottom: 1rem; font-size: 1.8rem; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);}
 
-        /* Gallery Grid */
+        /* Gallery Grid - Upgraded to Sepia effect */
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
-        .gallery-item { width: 100%; height: 250px; object-fit: cover; border: 2px solid #333; transition: all 0.3s; cursor: pointer; filter: grayscale(40%);}
-        .gallery-item:hover { transform: scale(1.02); filter: grayscale(0%); border-color: var(--accent-gold); z-index: 10; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.8);}
+        .gallery-item { width: 100%; height: 250px; object-fit: cover; border: 2px solid #333; transition: all 0.4s ease; cursor: pointer; filter: sepia(70%) contrast(110%) brightness(80%);}
+        .gallery-item:hover { transform: scale(1.03); filter: sepia(0%) contrast(100%) brightness(110%); border-color: var(--accent-gold); z-index: 10; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.9);}
 
-        /* Rules Page (Enhanced with Accordions and Tables) */
+        /* Rules Page */
         .rules-container { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        .rule-category { background: rgba(0,0,0,0.5); padding: 2rem; border-left: 4px solid var(--accent-red); margin-bottom: 1rem;}
+        .rule-category { background: rgba(0,0,0,0.6); padding: 2rem; border-left: 4px solid var(--accent-red); margin-bottom: 1rem; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
         .rule-item { margin-bottom: 1.5rem; }
-        .rule-item h4 { color: #fff; font-family: 'Spectral', serif; font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: bold;}
+        .rule-item h4 { color: #fff; font-family: 'Spectral', serif; font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: bold; text-shadow: 1px 1px 2px #000;}
         
         /* Collapsible Details Styling */
         details { width: 100%; }
-        summary { font-family: 'Rye', cursive; font-size: 1.8rem; color: var(--accent-gold); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; outline: none; transition: color 0.3s;}
+        summary { font-family: 'Rye', cursive; font-size: 1.8rem; color: var(--accent-gold); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; outline: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px #000;}
         summary::-webkit-details-marker { display: none; }
-        summary:hover { color: var(--accent-red-hover); }
-        summary::after { content: '+'; font-size: 2rem; color: var(--accent-red); font-family: 'Spectral', serif; }
-        details[open] summary::after { content: '-'; }
-        .details-content { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed #555; animation: fadeIn 0.4s ease-out; }
+        summary:hover { color: var(--accent-red-hover); text-shadow: 0 0 10px rgba(184, 35, 35, 0.5); transform: translateX(5px);}
+        summary::after { content: '+'; font-size: 2rem; color: var(--accent-red); font-family: 'Spectral', serif; transition: transform 0.3s; }
+        details[open] summary::after { content: '-'; transform: rotate(180deg); }
+        .details-content { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed #555; animation: dropDown 0.4s ease-out; }
+        @keyframes dropDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Penal Code Tables */
-        .penal-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; background: rgba(0,0,0,0.7); }
-        .penal-table th, .penal-table td { border: 1px solid #444; padding: 12px; text-align: left; }
-        .penal-table th { background: rgba(138, 28, 28, 0.85); color: #fff; font-family: 'Spectral', serif; font-size: 1.1rem; letter-spacing: 1px;}
-        .penal-table td { font-size: 1rem; color: var(--text-main); }
-        .penal-table tr:nth-child(even) { background: rgba(20,20,20,0.6); }
-        .penal-table tr:hover { background: rgba(138, 28, 28, 0.2); }
+        .penal-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; background: rgba(0,0,0,0.8); box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
+        .penal-table th, .penal-table td { border: 1px solid #444; padding: 14px; text-align: left; }
+        .penal-table th { background: linear-gradient(180deg, rgba(138, 28, 28, 0.95), rgba(100, 20, 20, 0.95)); color: #fff; font-family: 'Spectral', serif; font-size: 1.1rem; letter-spacing: 1px; text-shadow: 1px 1px 2px #000;}
+        .penal-table td { font-size: 1.05rem; color: var(--text-main); }
+        .penal-table tr:nth-child(even) { background: rgba(20,20,20,0.7); }
+        .penal-table tr:hover { background: rgba(138, 28, 28, 0.2); transition: background 0.2s ease;}
         .penal-highlight { color: var(--accent-gold); font-weight: bold; }
 
         /* Application Form */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
         .form-group.full-width { grid-column: 1 / -1; }
-        label { display: block; margin-bottom: 0.8rem; color: var(--accent-gold); font-weight: bold; letter-spacing: 1px; font-size: 1.1rem;}
+        label { display: block; margin-bottom: 0.8rem; color: var(--accent-gold); font-weight: bold; letter-spacing: 1px; font-size: 1.1rem; text-shadow: 1px 1px 2px #000;}
         input[type="text"], input[type="email"], input[type="number"], select, textarea {
-            width: 100%; padding: 15px; background: rgba(0,0,0,0.7);
+            width: 100%; padding: 15px; background: rgba(0,0,0,0.8);
             border: 1px solid #555; color: #fff; font-family: 'Spectral', serif; font-size: 1.1rem;
-            transition: border-color 0.3s, background 0.3s;
+            transition: all 0.3s ease; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
         }
-        input:focus, textarea:focus { outline: none; border-color: var(--accent-red); background: rgba(20,0,0,0.8); box-shadow: 0 0 10px rgba(138, 28, 28, 0.5); }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent-red); background: rgba(20,0,0,0.9); box-shadow: inset 0 2px 5px rgba(0,0,0,0.8), 0 0 12px rgba(138, 28, 28, 0.4); transform: translateY(-2px);}
         textarea { resize: vertical; min-height: 150px; }
 
         /* Footer */
         footer {
-            background: rgba(5, 5, 5, 0.98); text-align: center; padding: 3rem;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.98), rgba(10, 8, 8, 0.95)); text-align: center; padding: 4rem 2rem;
             border-top: 3px solid var(--accent-red); margin-top: auto; position: relative; z-index: 10;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
         }
         
         @media (max-width: 768px) {
@@ -200,7 +215,7 @@
     <div class="overlay"></div>
 
     <nav>
-        <div class="logo">OUTLAW <span>RP</span></div>
+        <div class="logo" onclick="switchPage('home', event)">OUTLAW <span>RP</span></div>
         <div class="nav-links">
             <button class="active" onclick="switchPage('home', event)">Home</button>
             <button onclick="switchPage('lore', event)">Lore</button>
@@ -250,15 +265,15 @@
                 
                 <h3 style="font-size: 2rem; border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 20px; margin-top: 40px;">State of the Territories</h3>
                 <div class="grid-3" style="gap: 1.5rem;">
-                    <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border: 1px solid #333;">
+                    <div style="background: rgba(0,0,0,0.5); padding: 1.5rem; border: 1px solid #333; box-shadow: inset 0 0 15px rgba(0,0,0,0.8);">
                         <h4 style="color: #fff; font-size: 1.4rem;">New Hanover</h4>
                         <p>The heartland. Valentine struggles under the weight of livestock barons and a corrupt local constabulary. It is a hotspot for rustlers and bar brawls.</p>
                     </div>
-                    <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border: 1px solid #333;">
+                    <div style="background: rgba(0,0,0,0.5); padding: 1.5rem; border: 1px solid #333; box-shadow: inset 0 0 15px rgba(0,0,0,0.8);">
                         <h4 style="color: #fff; font-size: 1.4rem;">Lemoyne</h4>
                         <p>Deep south corruption. The bustling city of Saint Denis offers high society and high-stakes crime, contrasting sharply with the treacherous, moonshine-soaked swamps of Bayou Nwa.</p>
                     </div>
-                    <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border: 1px solid #333;">
+                    <div style="background: rgba(0,0,0,0.5); padding: 1.5rem; border: 1px solid #333; box-shadow: inset 0 0 15px rgba(0,0,0,0.8);">
                         <h4 style="color: #fff; font-size: 1.4rem;">New Austin</h4>
                         <p>The unforgiving desert. A haven for those running from the law. Armadillo is suffering from outbreaks of disease, and Tumbleweed operates under a dictator-like Sheriff.</p>
                     </div>
@@ -276,27 +291,27 @@
                     <div class="card">
                         <h3 style="color: #3498db;">Law Enforcement</h3>
                         <p>From the muddy boots of the Valentine Deputies to the polished badges of the Saint Denis Police Department. Uphold the law, run investigations, and maintain order in a chaotic world.</p>
-                        <p><strong>Status:</strong> <span style="color: #2ecc71;">Hiring</span></p>
+                        <p><strong>Status:</strong> <span style="color: #2ecc71; text-shadow: 0 0 5px rgba(46, 204, 113, 0.4);">Hiring</span></p>
                     </div>
                     <div class="card">
                         <h3 style="color: var(--accent-red);">Outlaw Gangs</h3>
                         <p>Operate outside the law. Establish camps, run protection rackets, rob banks, and fight rival gangs for control of illicit trades like moonshining and gun-running.</p>
-                        <p><strong>Status:</strong> <span style="color: #f1c40f;">In-City</span></p>
+                        <p><strong>Status:</strong> <span style="color: #f1c40f; text-shadow: 0 0 5px rgba(241, 196, 15, 0.4);">In-City</span></p>
                     </div>
                     <div class="card">
                         <h3 style="color: #e67e22;">The Medical Board</h3>
                         <p>The true heroes of the frontier. Operate out of clinics across the map. Perform surgeries, treat gunshot wounds, craft vital medicines, and save lives.</p>
-                        <p><strong>Status:</strong> <span style="color: #2ecc71;">Hiring</span></p>
+                        <p><strong>Status:</strong> <span style="color: #2ecc71; text-shadow: 0 0 5px rgba(46, 204, 113, 0.4);">Hiring</span></p>
                     </div>
                     <div class="card">
                         <h3 style="color: #9b59b6;">Business Owners</h3>
                         <p>Run saloons, gunsmiths, general stores, or horse training facilities. Control the economy by supplying the county with the goods they need to survive.</p>
-                        <p><strong>Status:</strong> <span style="color: #f1c40f;">Requires Business Proposal</span></p>
+                        <p><strong>Status:</strong> <span style="color: #f1c40f; text-shadow: 0 0 5px rgba(241, 196, 15, 0.4);">Requires Business Proposal</span></p>
                     </div>
                     <div class="card">
                         <h3 style="color: #1abc9c;">Native Tribes</h3>
                         <p>Embrace the old ways. Live off the land, protect your sacred territories, trade unique crafted goods, and navigate the complex politics of a changing world.</p>
-                        <p><strong>Status:</strong> <span style="color: #f1c40f;">In-City</span></p>
+                        <p><strong>Status:</strong> <span style="color: #f1c40f; text-shadow: 0 0 5px rgba(241, 196, 15, 0.4);">In-City</span></p>
                     </div>
                 </div>
             </div>
@@ -329,7 +344,7 @@
                 <div class="rules-container">
                     
                     <div class="rule-category" style="border-left-color: #3498db;">
-                        <h3 style="margin-bottom: 1.5rem; font-size: 2rem; color: #3498db;">General Roleplay (OOC)</h3>
+                        <h3 style="margin-bottom: 1.5rem; font-size: 2rem; color: #3498db; text-shadow: 1px 1px 2px #000;">General Roleplay (OOC)</h3>
                         <div class="rule-item">
                             <h4>1. Value of Life (NVL)</h4>
                             <p>You must value your character's life at all times. If you are outnumbered or have a weapon drawn on you while unarmed, you must comply. Do not act like a fearless action hero.</p>
@@ -351,7 +366,7 @@
                     </div>
 
                     <div style="text-align: center; margin: 3rem 0 1rem 0;">
-                        <h2 style="font-size: 2.5rem; color: var(--accent-gold);">Territorial Penal Code</h2>
+                        <h2 style="font-size: 2.5rem; color: var(--accent-gold); text-shadow: 2px 2px 5px #000;">Territorial Penal Code</h2>
                         <p style="color: #aaa;">Issued under the authority of the U.S. Marshal’s Office, Outlaw RP County – 1900.</p>
                     </div>
 
@@ -449,7 +464,7 @@
 
                     <div class="rule-category">
                         <details>
-                            <summary>VI. Wildlife & Land Violations (Game Warden Law)</summary>
+                            <summary>VI. Wildlife & Land Violations</summary>
                             <div class="details-content">
                                 <h4>Hunting Hours</h4>
                                 <p><strong>Legal Hours:</strong> 5:00 AM – 8:00 PM<br>
@@ -509,7 +524,7 @@
                                 <p><strong>Dam Interference:</strong> $50–$200 Fine<br>
                                 <strong>Water Poisoning:</strong> $500–$1000 Fine | 4-6 Months Imprisonment</p>
                                 
-                                <p style="margin-top: 1rem; font-style: italic;">*Repeat Offenders face +25% increased fine and +50% increased jail time. Third offenses result in automatic referral to Territorial/Federal authorities.</p>
+                                <p style="margin-top: 1rem; font-style: italic; color: #aaa;">*Repeat Offenders face +25% increased fine and +50% increased jail time. Third offenses result in automatic referral to Territorial/Federal authorities.</p>
                             </div>
                         </details>
                     </div>
@@ -640,7 +655,7 @@
         };
 
         document.addEventListener("DOMContentLoaded", () => {
-            const allButtons = document.querySelectorAll('button, summary'); // Added sound to summary clicks too!
+            const allButtons = document.querySelectorAll('button, summary, .logo'); 
             allButtons.forEach(button => {
                 button.addEventListener('click', playClickSound);
             });
