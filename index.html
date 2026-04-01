@@ -222,7 +222,7 @@
             <button onclick="switchPage('factions', event)">Factions</button>
             <button onclick="switchPage('rules', event)">Rules & Laws</button>
             <button onclick="switchPage('gallery', event)">Gallery</button>
-            <button onclick="switchPage('apply', event)" style="color: var(--accent-red);">Apply Now</button>
+            <button onclick="switchPage('trailer', event)" style="color: var(--accent-red);">Trailer</button>
         </div>
         <div class="server-status">
             <div class="status-dot"></div>
@@ -235,7 +235,7 @@
             <div class="hero">
                 <h1>FORGE YOUR LEGACY</h1>
                 <p>Mount up, draw your iron, and survive in the most immersive, hardcore RedM roleplay experience available. Will you tame the west, or will the west tame you?</p>
-                <button class="btn" onclick="switchPage('apply', event)">Submit Whitelist App</button>
+                <button class="btn" onclick="switchPage('trailer', event)">Watch Trailer</button>
             </div>
 
             <div class="grid-3">
@@ -263,7 +263,7 @@
                 <p>The age of the gunslinger is drawing to a close, but the dying embers of the wild west burn the hottest. The federal government, backed by wealthy eastern magnates and the ruthless Pinkerton Detective Agency, is systematically crushing the remaining outlaw gangs.</p>
                 <p>In the territories of New Hanover, Ambarino, Lemoyne, and New Austin, civilization is encroaching. Telegraph lines cut across the skies, and the smoke of locomotives chokes the pristine valleys. Yet, in the shadows of the saloons and the hidden canyons, outlaws, rustlers, and revolutionaries refuse to bow to the coming century.</p>
                 
-                <h3 style="font-size: 2rem; border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 20px; margin-top: 40px;">State of the Territories</h3>
+                <h3 style="font-size: 2rem; border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 20px; margin-top: 40px;">Territories of the State  </h3>
                 <div class="grid-3" style="gap: 1.5rem;">
                     <div style="background: rgba(0,0,0,0.5); padding: 1.5rem; border: 1px solid #333; box-shadow: inset 0 0 15px rgba(0,0,0,0.8);">
                         <h4 style="color: #fff; font-size: 1.4rem;">New Hanover</h4>
@@ -566,63 +566,28 @@
             </div>
         </div>
 
-        <div id="apply" class="page-section">
+        <div id="trailer" class="page-section">
             <div class="panel">
                 <div class="panel-header">
-                    <h2>Whitelist Application</h2>
-                    <p style="color: #aaa;">We review applications within 48-72 hours. High effort is required.</p>
+                    <h2>Cinematic Trailer</h2>
+                    <p style="color: #aaa;">Experience the untamed frontier of OUTLAW RP</p>
                 </div>
 
-                <form id="whitelist-form" onsubmit="submitForm(event)">
-                    <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 1px dashed #444; padding-bottom: 10px;">Out of Character Information</h3>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="discord">Discord Username (e.g., outlaw#1234)</label>
-                            <input type="text" id="discord" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="age">Real Life Age (Must be 18+)</label>
-                            <input type="number" id="age" min="18" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="mic">Do you have a quality, working microphone?</label>
-                            <select id="mic" required>
-                                <option value="yes">Yes</option>
-                                <option value="no">No (Will result in denial)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="experience">RedM/FiveM RP Experience</label>
-                            <select id="experience" required>
-                                <option value="expert">Expert (Years of experience)</option>
-                                <option value="intermediate">Intermediate (Played a few servers)</option>
-                                <option value="beginner">Beginner (First time RPing)</option>
-                            </select>
-                        </div>
-                    </div>
+                <div style="border: 3px solid var(--accent-red); box-shadow: 0 10px 30px rgba(0,0,0,0.9); overflow: hidden;">
+                    <video width="100%" controls style="display: block; background: #000;">
+                        <source src="411e97bf4426410391f00c191f9021a2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
 
-                    <h3 style="margin-top: 2rem; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 1px dashed #444; padding-bottom: 10px;">In-Character Information</h3>
-                    <div class="form-grid">
-                        <div class="form-group full-width">
-                            <label for="charName">Character First & Last Name</label>
-                            <input type="text" id="charName" required>
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="backstory">Character Backstory (Minimum 200 words)</label>
-                            <textarea id="backstory" placeholder="Detail your character's origins, why they are traveling to this specific territory, and what their personal goals and fears are..." required></textarea>
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="scenario1">RP Scenario: You are at the saloon playing poker. Another player accuses you of cheating and draws a knife. You do not have a weapon. How do you respond?</label>
-                            <textarea id="scenario1" required></textarea>
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="scenario2">RP Scenario: You find a severely injured person on the side of the road. They are bleeding out. What actions do you take?</label>
-                            <textarea id="scenario2" required></textarea>
-                        </div>
+                <div style="margin-top: 3rem; text-align: center;">
+                    <h3 style="font-size: 2rem; color: #fff; margin-bottom: 1.5rem; text-shadow: 2px 2px 5px #000;">Join the Legend</h3>
+                    <p style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">Witness the untamed frontier where every decision matters, every shot counts, and legends are forged in blood and dust. The wild west awaits those brave enough to answer its call.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn" onclick="window.location.href='https://discord.gg/outlawrp';">Join Discord</button>
+                        <button class="btn" onclick="alert('Check our Discord for server access and more information.');">Get Server Info</button>
                     </div>
-
-                    <button type="submit" class="btn" style="width: 100%; margin-top: 2rem; padding: 20px; font-size: 1.6rem;">Submit Whitelist Application</button>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -651,7 +616,7 @@
             'factions': "url('https://images.unsplash.com/photo-1574015974293-817f0ebebb74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')", 
             'rules': "url('https://images.unsplash.com/photo-1518349079527-96105c31fbb8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')", 
             'gallery': "url('https://images.unsplash.com/photo-1596727293527-2c90c74fb9d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')", 
-            'apply': "url('https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" 
+            'trailer': "url('https://images.unsplash.com/photo-1596727293527-2c90c74fb9d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
         };
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -675,19 +640,14 @@
 
             if(event && event.target.tagName === 'BUTTON' && event.target.parentElement.classList.contains('nav-links')) {
                 event.target.classList.add('active');
-            } else if (pageId === 'apply') {
+            } else if (pageId === 'trailer') {
                 document.querySelector('.nav-links button:last-child').classList.add('active');
             }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Handle form submission
-        function submitForm(event) {
-            event.preventDefault(); 
-            alert("Application submitted successfully! Your journey in OUTLAW RP begins soon.");
-            document.getElementById('whitelist-form').reset();
-        }
+
     </script>
 </body>
 </html>
